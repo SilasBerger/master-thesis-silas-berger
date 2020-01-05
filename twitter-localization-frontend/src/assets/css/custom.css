@@ -1,0 +1,27 @@
+.dbadge {
+  width: fit-content;
+  padding: 6px 9px;
+  border-radius: 25px;
+  font-weight: bold;
+}
+
+.dbadge-ok {
+  color: white;
+  border-color: #89da59;
+  background-color: #89da59;
+}
+
+.dbadge-danger {
+  color: white;
+  border-color: #ff420e;
+  background-color: #ff420e;
+}
+
+i.icon-padded {
+  margin-right: 10px
+}
+
+p-button.icon-button{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}

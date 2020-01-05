@@ -1,0 +1,400 @@
+{
+	"accounts": [
+		{
+			"screen_name": "CVP_PDC",
+			"name": "CVP PDC PPD PCD",
+			"langs": ["FR", "DE", "IT"],
+			"region": "Switzerland"
+		},
+		{
+			"screen_name": "PLR_Suisse",
+			"name": "PLR Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "FDP_Liberalen",
+			"name": "FDP Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "SVPch",
+			"name": "SVP Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "UDCch",
+			"name": "UDC Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "GrueneCH",
+			"name": "GRÜNE Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "LesVertsSuisses",
+			"name": "Les VERTS suisses",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "PSSuisse",
+			"name": "PS Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "spschweiz",
+			"name": "SP Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "vertliberaux",
+			"name": "Vert'libéraux Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "grunliberale",
+			"name": "Grünliberale Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "PBDSuisse",
+			"name": "PBD Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "BDPSchweiz",
+			"name": "BDP Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "evppev",
+			"name": "EVP Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "JVertEs_Ge",
+			"name": "Jeunes Vert-e-s GE",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "jGruene_jVertEs",
+			"name": "Junge Grüne Schweiz",
+			"langs": ["FR", "DE"],
+			"region": "Switzerland"
+		},
+		{
+			"screen_name": "JungeGrueneZH",
+			"name": "Junge Grüne Zürich",
+			"langs": ["DE"],
+			"region": "Zürich"
+		},
+		{
+			"screen_name": "jungegruenebern",
+			"name": "Junge Grüne Kt. Bern",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "VertsVD",
+			"name": "Les Verts vaudois",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+		{
+			"screen_name": "VertsLausannois",
+			"name": "Les Verts Lausannois",
+			"langs": ["FR"],
+			"city": "Lausanne"
+		},
+		{
+			"screen_name": "vertsgenevois",
+			"name": "Les Verts genevois",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "vertsvs",
+			"name": "Les Verts Valais",
+			"langs": ["FR"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "JVerts_Vs",
+			"name": "Jeunes Verts Valais",
+			"langs": ["FR"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "LesVertsFr",
+			"name": "Les Verts Fribourg",
+			"langs": ["FR"],
+			"region": "Fribourg"
+		},
+		{
+			"screen_name": "VertsNE",
+			"name": "Les Verts NE",
+			"langs": ["FR"],
+			"region": "Neuchâtel"
+		},
+		{
+			"screen_name": "vertsmorges",
+			"name": "Les Verts de Morges",
+			"langs": ["FR"],
+			"city": "Morges"
+		},
+		{
+			"screen_name": "GrueneZuerich",
+			"name": "Grüne Zürich",
+			"langs": ["DE"],
+			"region": "Zürich"
+		},
+		{
+			"screen_name": "gruene_aargau",
+			"name": "Grüne Aargau",
+			"langs": ["DE"],
+			"region": "Aargau"
+		},
+		{
+			"screen_name": "gruenebern",
+			"name": "Grüne Kanton Bern",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "GruenesBuendnis",
+			"name": "Grünes Bündnis",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "jungegrueneAG",
+			"name": "Junge Grüne Aargau",
+			"langs": ["DE"],
+			"region": "Aargau"
+		},
+		{
+			"screen_name": "Gruene_LU",
+			"name": "Grüne Luzern",
+			"langs": ["DE"],
+			"region": "Luzern"
+		},
+		{
+			"screen_name": "GrueneBasel",
+			"name": "Grüne Basel-Stadt",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "grueneBL",
+			"name": "Grüne Baselland",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "AlternativeZG",
+			"name": "AlternativGrüne Zug",
+			"langs": ["DE"],
+			"region": "Zug"
+		},
+		{
+			"screen_name": "GFLBern",
+			"name": "GrüneFreieListe GFL",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "POPVaud",
+			"name": "POP Vaud",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+		{
+			"screen_name": "JeunesPOPVaud",
+			"name": "Jeunes POP Vaud",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+		{
+			"screen_name": "psvaud",
+			"name": "PS Vaudois",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+		{
+			"screen_name": "JSVaud",
+			"name": "JS Vaudoise",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+		{
+			"screen_name": "PSLausanne",
+			"name": "PS Lausanne",
+			"langs": ["FR"],
+			"city": "Lausanne"
+		},
+		{
+			"screen_name": "PS_Genevois",
+			"name": "PS Genevois",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "psgeneve",
+			"name": "Parti Socialiste Ville GE",
+			"langs": ["FR"],
+			"city": "Genève"
+		},
+		{
+			"screen_name": "PSValaisRomand",
+			"name": "PS Valais Romand",
+			"langs": ["FR"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "jsvalais",
+			"name": "JSVR",
+			"langs": ["FR"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "PSVilleneuve",
+			"name": "PS Villeneuve",
+			"langs": ["FR"],
+			"city": "Villeneuve"
+		},
+		{
+			"screen_name": "psrenens",
+			"name": "PS Renens",
+			"langs": ["FR"],
+			"city": "Renens"
+		},
+		{
+			"screen_name": "PSCrissier",
+			"name": "PS Crissier",
+			"langs": ["FR"],
+			"city": "Crissier"
+		},
+		{
+			"screen_name": "SPBaselStadt",
+			"name": "SP Basel-Stadt",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "sp_bl",
+			"name": "SP Baselland",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "JUSOzh",
+			"name": "JUSO Kanton Zürich",
+			"langs": ["DE"],
+			"region": "Zürich"
+		},
+		{
+			"screen_name": "juso_lu",
+			"name": "JUSO Kanton Luzern",
+			"langs": ["DE"],
+			"region": "Luzern"
+		},
+		{
+			"screen_name": "diestadtpartei",
+			"name": "SP Stadt Luzern",
+			"langs": ["DE"],
+			"city": "Luzern"
+		},
+		{
+			"screen_name": "sp_luzern",
+			"name": "SP Kanton Luzern",
+			"langs": ["DE"],
+			"region": "Luzern"
+		},
+		{
+			"screen_name": "JUSOAargau",
+			"name": "JUSO Aargau",
+			"langs": ["DE"],
+			"region": "Aargau"
+		},
+		{
+			"screen_name": "JUSOBS",
+			"name": "JUSO Basel-Stadt",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "JUSO_BE",
+			"name": "JUSO Kanton Bern",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "SP_Aargau",
+			"name": "SP Kanton Aargau",
+			"langs": ["DE"],
+			"region": "Aargau"
+		},
+		{
+			"screen_name": "jusobl",
+			"name": "JUSO Baselland",
+			"langs": ["DE"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "spkantonbern",
+			"name": "SPBE",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "JUSOStadtBern",
+			"name": "JUSO Stadt Bern",
+			"langs": ["DE"],
+			"city": "Bern"
+		},
+		{
+			"screen_name": "JusoSchweiz",
+			"name": "JUSO Schweiz",
+			"langs": ["DE"],
+			"region": "Deutschschweiz"
+		},
+		{
+			"screen_name": "JSSuisse",
+			"name": "JS Suisse",
+			"langs": ["FR"],
+			"region": "Romandie"
+		},
+		{
+			"screen_name": "FemmesSPFrauen",
+			"name": "SP Frauen Schweiz",
+			"langs": ["FR", "DE"],
+			"region": "Switzerland"
+		},
+		{
+			"screen_name": "glp_ag",
+			"name": "Grünliberale Aargau",
+			"langs": ["DE"],
+			"region": "Aargau"
+		},
+		{
+			"screen_name": "glp_GR",
+			"name": "Grünliberale GR",
+			"langs": ["DE"],
+			"region": "Graubünden"
+		}
+	]
+}

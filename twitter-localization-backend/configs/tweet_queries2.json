@@ -1,0 +1,195 @@
+[
+    {
+        "lang": "de",
+        "query": "fussball",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "arbeit"
+    },
+    {
+        "lang": "de",
+        "query": "stau"
+    },
+    {
+        "lang": "de",
+        "query": "auto"
+    },
+    {
+        "lang": "de",
+        "query": "bahn"
+    },
+    {
+        "lang": "de",
+        "query": "öffentlicher verkehr"
+    },
+    {
+        "lang": "de",
+        "query": "radio"
+    },
+    {
+        "lang": "de",
+        "query": "song"
+    },
+    {
+        "lang": "de",
+        "query": "lied"
+    },
+    {
+        "lang": "de",
+        "query": "kino"
+    },
+    {
+        "lang": "de",
+        "query": "film"
+    },
+    {
+        "lang": "de",
+        "query": "bundeshaus"
+    },
+    {
+        "lang": "de",
+        "query": "bundesrat"
+    },
+    {
+        "lang": "de",
+        "query": "ständerat"
+    },
+    {
+        "lang": "de",
+        "query": "nationalrat"
+    },
+    {
+        "lang": "de",
+        "query": "sbb"
+    },
+    {
+        "lang": "fr",
+        "query": "football"
+    },
+    {
+        "lang": "fr",
+        "query": "travail"
+    },
+    {
+        "lang": "fr",
+        "query": "bouchon"
+    },
+    {
+        "lang": "fr",
+        "query": "voiture"
+    },
+    {
+        "lang": "fr",
+        "query": "train"
+    },
+    {
+        "lang": "fr",
+        "query": "transport public"
+    },
+    {
+        "lang": "fr",
+        "query": "radio"
+    },
+    {
+        "lang": "fr",
+        "query": "song"
+    },
+    {
+        "lang": "fr",
+        "query": "chanson"
+    },
+    {
+        "lang": "fr",
+        "query": "cinema"
+    },
+    {
+        "lang": "fr",
+        "query": "film"
+    },
+    {
+        "lang": "fr",
+        "query": "palais federal"
+    },
+    {
+        "lang": "fr",
+        "query": "conseil federal"
+    },
+    {
+        "lang": "fr",
+        "query": "conseil des etats"
+    },
+    {
+        "lang": "fr",
+        "query": "conseil national"
+    },
+    {
+        "lang": "fr",
+        "query": "cff"
+    },
+    {
+        "lang": "it",
+        "query": "calcio"
+    },
+    {
+        "lang": "it",
+        "query": "lavoro"
+    },
+    {
+        "lang": "it",
+        "query": "ingorgo"
+    },
+    {
+        "lang": "it",
+        "query": "macchina"
+    },
+    {
+        "lang": "it",
+        "query": "treno"
+    },
+    {
+        "lang": "it",
+        "query": "trasporto pubblico"
+    },
+    {
+        "lang": "it",
+        "query": "radio"
+    },
+    {
+        "lang": "it",
+        "query": "song"
+    },
+    {
+        "lang": "it",
+        "query": "canzone"
+    },
+    {
+        "lang": "it",
+        "query": "cinema"
+    },
+    {
+        "lang": "it",
+        "query": "film"
+    },
+    {
+        "lang": "it",
+        "query": "palazzo federale"
+    },
+    {
+        "lang": "it",
+        "query": "consiglio federale"
+    },
+    {
+        "lang": "it",
+        "query": "consiglio degli statu"
+    },
+    {
+        "lang": "it",
+        "query": "consiglio nazionale"
+    },
+    {
+        "lang": "it",
+        "query": "ffs"
+    }
+]

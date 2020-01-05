@@ -1,0 +1,8 @@
+{
+  "neo4j_host": "bolt://192.168.99.100:7687",
+  "mongodb_host": "mongodb://192.168.99.100:27017",
+  "influencers_db": "SwissInfluencers",
+  "influencers_collection": "influencers",
+  "influencer_list_url": "test/data/influencer_lists",
+  "influencer_list_names": ["newspapers", "personalities", "political-parties", "politicians", "radios", "sports-teams", "televisions"]
+}

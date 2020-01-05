@@ -1,0 +1,5 @@
+GEOID_SWITZERLAND = 2658434
+GEOID_FOREIGN = -1
+PARTIAL = "partial"
+FINAL = "final"
+INTERMEDIATE_RESULT = "intermediate"

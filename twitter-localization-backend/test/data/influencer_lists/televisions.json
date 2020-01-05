@@ -1,0 +1,108 @@
+{
+	"accounts": [
+		{
+			"screen_name": "RadioTeleSuisse",
+			"name": "RTS",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "RTSinfo",
+			"name": "RTSinfo",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "RTSinfolive",
+			"name": "RTSinfolive",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "RTSsport",
+			"name": "RTS Sport",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "RTSUnDeux",
+			"name": "RTS Un | RTS Deux",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "RTSinfrarouge",
+			"name": "RTS Infrarouge",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "rtsTTC",
+			"name": "TTC",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "Nouvo",
+			"name": "Nouvo RTS",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "NouvoDE",
+			"name": "Nouvo SRF",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srf",
+			"name": "SRF",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfnews",
+			"name": "SRF News",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfesc",
+			"name": "SRF ESC",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfsport",
+			"name": "SRF Sport",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfmeteo",
+			"name": "SRF Meteo",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfkultur",
+			"name": "SRF Kultur",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfdata",
+			"name": "SRF Data",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srf_ostschweiz",
+			"name": "SRF Regionaljournal",
+			"langs": ["DE"],
+			"region": "Ostschweiz"
+		},
+		{
+			"screen_name": "srfbern",
+			"name": "SRF Regionaljournal",
+			"langs": ["DE"],
+			"region": "Bern"
+		},
+		{
+			"screen_name": "srfaarau",
+			"name": "SRF Regionaljournal",
+			"langs": ["DE"],
+			"region": "Aarau"
+		},
+		{
+			"screen_name": "srfbasel",
+			"name": "SRF Regionaljournal",
+			"langs": ["DE"],
+			"region": "Basel"
+		}
+	]
+}

@@ -1,0 +1,207 @@
+{
+	"accounts": [
+		{
+			"screen_name": "EtoileCarouge",
+			"name": "Etoile Carouge FC",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "scbruehl",
+			"name": "SC Brühl St. Gallen",
+			"langs": ["DE"],
+			"region": "Sankt Gallen"
+		},
+		{
+			"screen_name": "CSCHENOIS",
+			"name": "CS CHENOIS",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "HoppSuisse",
+			"name": "HoppSuisse",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "FC_Basel_fr",
+			"name": "FC Basel 1893",
+			"langs": ["FR"],
+			"region": "Basel"
+		},
+		{
+			"screen_name": "csitalien",
+			"name": "CS Italien F.C.",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "fc_locarno",
+			"name": "FC Locarno",
+			"langs": ["IT"],
+			"city": "Locarno"
+		},
+		{
+			"screen_name": "FC_Tuggen",
+			"name": "FC_Tuggen",
+			"langs": ["DE"],
+			"region": "Schwytz"
+		},
+		{
+			"screen_name": "BernexFc",
+			"name": "Signal Bernex FC",
+			"langs": ["FC"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "veyriersports",
+			"name": "FC Veyrier Sports",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+		{
+			"screen_name": "FCSion_DE",
+			"name": "FC Sion De",
+			"langs": ["DE"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "FC_Naters",
+			"name": "FC Naters Oberwallis",
+			"langs": ["DE"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "XamaxFCS_DE",
+			"name": "NE Xamax FCS DE",
+			"langs": ["DE"],
+			"region": "Neuchâtel"
+		},
+		{
+			"screen_name": "hcap1937",
+			"name": "HC Ambrì Piotta",
+			"langs": ["IT"],
+			"region": "Tessin"
+		},
+		{
+			"screen_name": "scbern_news",
+			"name": "SC Bern",
+			"langs": ["DE"],
+			"city": "Bern"
+		},
+		{
+			"screen_name": "ehcbiel",
+			"name": "EHC Biel-Bienne",
+			"langs": ["DE"],
+			"city": "Biel"
+		},
+        {
+			"screen_name": "HCDavos_off",
+			"name": "Hockey Club Davos",
+			"langs": ["DE"],
+			"region": "Graubünden"
+		},
+        {
+			"screen_name": "frgotteron",
+			"name": "HC Fribourg-Gottéron",
+			"langs": ["FR", "DE"],
+			"region": "Fribourg"
+		},
+        {
+			"screen_name": "officialgshc",
+			"name": "Geneve-Servette HC",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+        {
+			"screen_name": "lausannehc",
+			"name": "Lausanne Hockey Club",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+        {
+			"screen_name": "officialhcl",
+			"name": "HC Lugano",
+			"langs": ["IT"],
+			"region": "Tessin"
+		},
+        {
+			"screen_name": "lakers_1945",
+			"name": "SCRJ Lakers",
+			"langs": ["DE"],
+			"city": "Rapperswil-Jona"
+		},
+        {
+			"screen_name": "official_evz",
+			"name": "EVZ",
+			"langs": ["DE"],
+			"region": "Zug"
+		},
+        {
+			"screen_name": "zsclions",
+			"name": "ZSC Lions",
+			"langs": ["DE"],
+			"city": "Zürich"
+		},
+        {
+			"screen_name": "bbc_monthey",
+			"name": "BBC Monthey-Chablais",
+			"langs": ["FR"],
+			"city": "Monthey"
+		},
+        {
+			"screen_name": "bcboncourt",
+			"name": "Basket-Club Boncourt",
+			"langs": ["FR"],
+			"city": "Monthey"
+		},
+        {
+			"screen_name": "FribourgOlympic",
+			"name": "Fribourg Olympic",
+			"langs": ["FR"],
+			"city": "Fribourg"
+		},
+        {
+			"screen_name": "LionsGeneve",
+			"name": "Lions de Genève",
+			"langs": ["FR"],
+			"region": "Genève"
+		},
+        {
+			"screen_name": "TigersLugano",
+			"name": "Lugano Tigers",
+			"langs": ["IT"],
+			"city": "Lugano"
+		},
+        {
+			"screen_name": "PullyLsneFoxes",
+			"name": "Pully Lausanne Foxes",
+			"langs": ["FR"],
+			"region": "Vaud"
+		},
+        {
+			"screen_name": "VRB1952",
+			"name": "Vevey Riviera Basket",
+			"langs": ["FR"],
+			"city": "Vevey"
+		},
+        {
+			"screen_name": "SamMassagno",
+			"name": "SAM Basket Massagno",
+			"langs": ["IT"],
+			"city": "Massagno"
+		},
+        {
+			"screen_name": "starwingsbasket",
+			"name": "Starwings Basket",
+			"langs": ["DE"],
+			"city": "Birsfelden"
+		},
+        {
+			"screen_name": "UnionNeuchatel",
+			"name": "Union Neuchâtel",
+			"langs": ["FR"],
+			"region": "Neuchâtel"
+		}
+	]
+}

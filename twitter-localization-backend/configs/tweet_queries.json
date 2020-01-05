@@ -1,0 +1,242 @@
+[
+    {
+        "lang": "de",
+        "query": "bundeshaus",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "bundesrat",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "ständerat",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "nationalrat",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "palais federal",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "conseil federal",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "conseil des etats",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "conseil national",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "palazzo federale",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "consiglio federale",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "consiglio degli statu",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "consiglio nazionale",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "ffs",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "sbb",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "cff",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "fussball",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "arbeit",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "stau",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "auto",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "bahn",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "öffentlicher verkehr",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "radio",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "song",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "lied",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "kino",
+        "completed": true
+    },
+    {
+        "lang": "de",
+        "query": "film",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "football",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "travail",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "bouchon",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "voiture",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "train",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "transport public",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "radio",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "song",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "chanson",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "cinema",
+        "completed": true
+    },
+    {
+        "lang": "fr",
+        "query": "film",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "calcio",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "lavoro",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "ingorgo",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "macchina",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "treno",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "trasporto pubblico",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "radio",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "song",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "canzone",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "cinema",
+        "completed": true
+    },
+    {
+        "lang": "it",
+        "query": "film",
+        "completed": true
+    }
+]

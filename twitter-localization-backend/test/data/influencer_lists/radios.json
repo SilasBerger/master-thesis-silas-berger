@@ -1,0 +1,41 @@
+{
+	"accounts": [
+		{
+			"screen_name": "ForumRTS",
+			"name": "Forum RTS",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "Couleur3",
+			"name": "Couleur3",
+			"langs": ["FR"]
+		},
+		{
+			"screen_name": "srfdigital",
+			"name": "SRF Digital",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srf3",
+			"name": "SRF 3",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "srfkonsum",
+			"name": "SRF Konsum",
+			"langs": ["DE"]
+		},
+		{
+			"screen_name": "radio_rottu",
+			"name": "rro - radio rottu",
+			"langs": ["DE"],
+			"region": "Valais"
+		},
+		{
+			"screen_name": "rroVerkehr",
+			"name": "rro Verkehr",
+			"langs": ["DE"],
+			"region": "Valais"
+		}
+	]
+}

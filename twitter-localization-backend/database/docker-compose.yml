@@ -1,0 +1,21 @@
+version: '3'
+services: 
+  mongo:  
+    image: mongo:4.0.3
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+  neo4j:
+    ports: 
+      - "7473:7473"
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+    image: neo4j:3.3
+volumes:
+  mongodb_data: {}
+  neo4j_data: {}
