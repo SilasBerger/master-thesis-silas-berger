@@ -119,6 +119,8 @@ In addition to storing Twitter user metadata and Tweets, we also require a solut
 
 Finally, we want to accompany each Swiss / non-Swiss classification with a value that conveys the classifiers confidence in its decisions. As pointed out by Devarakota et al. (2007) \cite{deva07a}, this can be especially relevant for security-sensitive applications, as a way to reject samples with a high chance of false classification. As also observed by Devarakota et al. (2007) \cite{deva07a}, the most common approach to this is to use the estimated class membership probability of each classifier to serve as a prediction confidence value. However, both Devarakota et al. (2007) \cite{deva07a} and Alasalmi et al. (2016) \cite{alsa16a} also propose more complex approaches to this problem, which can result in more reliable confidence estimates.
 
+In summary, we see that there are two main groups of approaches to localizing a Twitter user. Researchers either use the textual contents of a Twitter user's Tweets or self-description, or the use aspects of their friendship network, such as their follows-relationships and their retweet and reply-tweet behavior. In the former approach, researchers often look for specific words that can be considered indicators of a user's location, such as words with strong spatial locality \cite{ryoo14a}. Approaches relying on textual content generally have a few challenges in common, such as having to deal with noisy data, and having to adapt models to different languages. Additionally, users may not always adhere to proper grammar and orthography when posting on social media, making Natural Language Processing tasks even more difficult. That said, noisy data is also an issue when taking the approach of examining a user's friendship and interaction network. Some accounts may be oriented towards maximizing exposure and thus follow and interact with an exceptionally large number of other users. Another source of noise in this approach is the circumstance that users may choose to (partially) ignore accounts from within their region or country, in favor of following accounts that are relevant with respect to their particular interests. For instance, a user with an interest in computer science may favor accounts by relevant people in that field, such as Elon Musk (Tesla Motors / SpaceX), Sundar Pichai (Google) or Bill Gates (Microsoft), rather than those of their region's local media outlets, politicians, or friends living in the region. This goes to show that both of these groups of approaches may work well for some given Twitter user, but can fail for another. Whether an approach is successful largely depends on what assumptions it needs to make, and whether a given Twitter user in question fulfills them.
+
 \section{Design}
 We break our classification system down into three core components: features, classifiers, and metamodels.
 
@@ -154,10 +156,10 @@ Multiple metamodels can be active on the graph at the same time, since all modif
 Metamodels can be as generic or as ad-hoc. For instance, we might have separate metamodels for each relevant scikit-learn classifier, but we might also have a single “Scikit-learn Meta-Model”, which takes a classifier as an option, or even learns the ideal classifier, based on the validation data.
 
 \section{Implementation}
-[Add introductory text here.]
+We have discussed our goals and problem statement, as well as the state of the art and our theoretical approach. In this chapter, we will give an overview of the technologies we used, why we chose them, and what the architecture of our localization pipeline looks like. We will also discuss the different data sets we have collected and explain the feature extractors, classifiers and metamodels we have implemented.
 
 \subsection{Architecture and Technologies}
-\begin{figure}
+\begin{figure}[!htb]
 	\centering
 	\includegraphics[scale=0.45]{architecture_overview}
 	\caption{Architecture Overview}
@@ -179,7 +181,7 @@ In our MongoDB database, we maintain the following collections:
 \item \textbf{Influencer List.} Representation of the list of influencers on GitHub\footnote{\href{https://github.com/acknowledge/swiss-twitter-accounts}{https://github.com/acknowledge/swiss-twitter-accounts}}. Storing their screen name, influencer category (politicians, sports teams, media outlets, etc.), and their "fetch status" (i.e. whether we have already fetched the full meta data object for that user). The documents in this collection do not contain the full meta data objects for these users (these are added to the Twitter Users collection and marked as "type: influencer"). This collection currently contains 325 influencer users.
 \item \textbf{GeoNames Places.} Meta data object of geographic place specifications corresponding to the GeoNames API. Places are added whenever a user's location field yields a result from the GeoNames API. This collection also contains all PPL*-type\footnote{\href{https://www.geonames.org/export/codes.html}{https://www.geonames.org/export/codes.html}}  GeoNames places for Switzerland, to enable local lookups without being limited by any API rate restrictions.
 \item \textbf{Twitter Users Test Set.} A collection of Twitter user meta data objects collected by searching for Tweets matching a list of given keywords. These users are not necessarily related to any of the entries in the Twitter Users collection. All users in this Test Set collection must have a location field that yields a valid result at the GeoNames API, otherwise they are not collected. They all have a GeoNames ID in their user\_place field, which resulted form looking up their location field at the GeoNames API. We use this GeoNames ID as the ground truth for these users' location.
-\item \textbf{Tweets.} A collection of Tweets sent out by users in either the Twitter Users collection or the Test Set collection. 
+\item \textbf{Tweets.} A collection of Tweets sent out by users in our Test Set collection. 
 \item \textbf{Feature Cache.} A collection of documents corresponding to entities in either the Twitter Users or Twitter Users Test Set collection. If a feature extractor extracts a feature value for a given user, that value can be cached in the corresponding document in this collection. This is done as a means to avoid expensive recalculations of feature values.
 \end{itemize}
 
@@ -194,7 +196,14 @@ In the graph, each Twitter user is from the MongoDB database can be depicted as 
 
 In addition to users, we also have nodes for all geographic locations in Switzerland, provided by GeoNames. Similar to users, these nodes have a reduces set of attributes, in order to save disk space. Since we mostly work with binary classification, the main geographic nodes used are "Switzerland" and "Foreign" - a dummy node representing the location "not Switzerland". This is useful, since classify each user as Swiss or non-Swiss, rather than extracting their explicit country of origin if they are foreign.
 
-When a meta-model localizes a user, it can create an edge in the graph, between that user's node and the location (in our case, "Switzerland" or "Foreign"). The edge can hold attributes such as the meta-model instance by which this localization was created, and the confidence for this decision. This architecture facilitates the process of storing and finding localization decisions made by any meta-model. It also allows different metamodels to persist their partial and final localization decisions simultaneously, without affecting each other. Some use cases include 1) querying for all localization decision made by a specific meta-model instance (useful for evaluating a meta-model's performance), 2) querying for the localization decision made by a specific meta-model for a specific user, and 3) querying for all localization decisions made by any meta-model for a specific user.
+When a meta-model localizes a user, it can create an edge in the graph, between that user's node and the location (in our case, "Switzerland" or "Foreign"). The edge can hold attributes such as the meta-model instance by which this localization was created, and the confidence for this decision. This architecture facilitates the process of storing and finding localization decisions made by any meta-model. It also allows different metamodels to persist their partial and final localization decisions simultaneously, without affecting each other. Some use cases include 1) querying for all localization decision made by a specific meta-model instance (useful for evaluating a meta-model's performance), 2) querying for the localization decision made by a specific meta-model for a specific user, and 3) querying for all localization decisions made by any meta-model for a specific user. Figure \ref{fig:knowledge-graph-schema} shows an example of the schema we use for persisting localization results for Twitter users.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.30]{knowledge-graph-schema}
+	\caption{Knowledge Graph: Localization Schema}
+	\label{fig:knowledge-graph-schema}
+\end{figure}
 
 \subsubsection{Tweepy}
 We use Tweepy\footnote{\href{https://www.tweepy.org/}{https://www.tweepy.org/}} as a wrapper for interacting with the Twitter REST API. Tweepy offers a seamless integration of API requests and responses into Python code. Additionally, it can automatically await rate limitations and resume its requests afterwards. 
@@ -203,14 +212,14 @@ We use Tweepy\footnote{\href{https://www.tweepy.org/}{https://www.tweepy.org/}} 
 Scikit-learn\footnote{\href{https://scikit-learn.org/stable/}{https://scikit-learn.org/stable/}} is a framework for machine learning in Python. Among other features, it provides implementations for most of the commonly used classifiers, such as k-Nearest Neighbours, Support Vector Machines, Naive Bayes, and Decision Trees, short of Artificial Neural Networks. The provided classifiers are efficient and all use the same interface for training and classification, which makes it easy to switch between different classifiers. This allows us to quickly try out multiple different classifiers in each of our metamodels, in order to find one that works best with the given feature set.
 
 \subsubsection{SpaCy}
-For the purpose of Named Entity Recognition (NER), we use SpaCy\footnote{\href{https://spacy.io/}{https://spacy.io/}}, a state-of-the-art framework for Natural Language Processing. We originally intended to use simple PoS tagging using NLTK\footnote{\href{https://www.nltk.org/}{https://www.nltk.org/}}. However, NER has proven to be a more useful approach to the problems at hand. Additionally, NLTK does not ship with out-of-the-box PoS tagging support for German, French and Italian. These languages are natively supported by SpaCy, which is another core reason why we decided to use this framework instead.
+For the purpose of Named Entity Recognition (NER), we use SpaCy\footnote{\href{https://spacy.io/}{https://spacy.io/}}, a state-of-the-art framework for Natural Language Processing. NER describes the task of identifying occurrences of a specific object in a sentence, and tagging these objects within a given set of categories. Such categories can include "person", "location", "organization", and so on \cite{lock09a}. We originally intended to use simple PoS tagging using NLTK\footnote{\href{https://www.nltk.org/}{https://www.nltk.org/}}. PoS tagging, as opposed to NER, is the process of marking up each word in a sentence with its specific grammatical part of speech, such as nouns, verbs, adjectives, interjections, and, most importantly for our application, proper nouns. However, NER has proven to be a more useful approach to the problems at hand. Additionally, NLTK does not ship with out-of-the-box PoS tagging support for German, French and Italian. These languages are natively supported by SpaCy, which is another core reason why we decided to use this framework instead.
 
 \subsection{Data Collection}
 In order to start building feature extractors and metamodels, we first needed to collect data. As a starting point, we used the already compiled lists of Swiss influencers \footnote{\href{https://github.com/acknowledge/swiss-twitter-accounts}{https://github.com/acknowledge/swiss-twitter-accounts}}. We started by querying the Twitter API for the meta data object for each of the user handles on these lists, and persisting them to the influencers collection in MongoDB. Next, we queried the API for the follower IDs for each of these influencers. This process was rather time-consuming. The Twitter API can be queried for follower IDs a maximum of 15 times per 15-minute window. Additionally, it returns at most 5000 IDs per query. Since our influencers tend to be rather popular accounts, they often have several hundred thousand followers, which means that it can take multiple hours just to retrieve the follower IDs for a single influencer.
 
 After collecting the influencer IDs for all influencers, we proceeded by fetching the meta data objects for all Twitter users corresponding to these IDs. With more than a million distinct IDs and a rate limit of 900 queries per 15-minute window, this again took a long time.
 
-Up to this point, all of our collected Twitter users were either influencers or their followers. In order to get independent sets for training, validation and testing (referred to as the "TVT set"), we developed a crawler that searches the Twitter API for tweets corresponding to a given search term. We defined a list of search terms where some of the terms should yield mostly Tweets by Swiss people, such as "Bundesrat" and "Bundeshaus", while others are not specific to Switzerland, such as "football" and "traffic". Each term was given three times, once in each German, French and Italian, in order to accommodate the three most common official languages in Switzerland. For every resulting Tweet, we then took its author's user-generated location field and matched it against the GeoNames API. If this returned a valid result, the author was collected into our TVT set. The result of this was a set of Twitter users with known location, which does not depend on our list of influencers and their followers.
+Up to this point, all of our collected Twitter users were either influencers or their followers. In order to get independent sets for training, validation and testing (referred to as the "TVT set"), we developed a crawler that searches the Twitter API for tweets corresponding to a given search term. We defined a list of search terms where some of the terms should yield mostly Tweets by Swiss people, such as "Bundesrat" and "Bundeshaus", while others are not specific to Switzerland, such as "football" and "traffic". Each term was given three times, once in each German, French and Italian, in order to accommodate the three most common official languages in Switzerland. This yielded a total of 15 Swiss-specific terms, and 32 non-specific terms. This list can be found in \hyperref[sec:appendix-searchterms]{Appendix A}. For every resulting Tweet, we then took its author's user-generated location field and matched it against the GeoNames API. If this returned a valid result, the author was collected into our TVT set. The result of this was a set of Twitter users with known location, which does not depend on our list of influencers and their followers.
 
 Finally, we needed to collect Tweets. In order to get a large enough sample, we decided to collect each user's most recent 100 Tweets. We initially intended to collect Tweets for every user in our database - that is, for every influencer, every follower, and every user in the TVT set. However, due to the strict rate limitations and the large number of users in our database, we decided to restrict our collection to just the users in the TVT set.
 
@@ -226,7 +235,7 @@ SIFR(u) := \frac{\#(F\cap I)}{\#F}
 \end{equation}
 where $F$ is the set of Twitter users followed by user $u$, and $I$ is the set of all Twitter user in our list of Swiss influencers.
 
-\textbf{Hashtag Similarity.} In contrast to the two previously mentioned features, the Hashtag Similarity relies on a user's Tweet content, rather than their friendship network. When this feature extractor is instantiated, it first generates a set $M$ of the $n$ most common hashtags used by the Swiss users in the training set. When the Hashtag Similarity feature is to be extracted for a new user $u$, the analogous set $U$ is calculated for the sample of that user's Tweets we hold in our database. The Hashtag Similarity for user $u$ is then defined as
+\textbf{Hashtag Similarity.} In contrast to the two previously mentioned features, the Hashtag Similarity relies on a user's Tweet content, rather than their friendship network. When this feature extractor is instantiated, it first generates a set $M$ of the $n$ most common hashtags used by the Swiss users in the training set. The collection of the 100 most common hashtags among Swiss users at the time of our experiment can be found in \hyperref[sec:appendix-hashtags]{Appendix B}. When the Hashtag Similarity feature is to be extracted for a new user $u$, the analogous set $U$ is calculated for the sample of that user's Tweets we hold in our database. The Hashtag Similarity for user $u$ is then defined as
 \begin{equation}
 HS(u) := \frac{\#(M\cap U)}{n}
 \end{equation}
@@ -248,9 +257,9 @@ where $mentions$, $retweets$ and $replies$ are the number of @mentions, Retweets
 swiss\_mentions\_ratio \\ swiss\_retweets\_ratio \\ swiss\_replies\_ratio
 \end{pmatrix}
 \end{equation}
-where $swiss\_mentions\_ratio$ is defined as the number of users mentioned who are known to be Swiss, divided by the total number of @mentions found in our sample of this user's Tweets. $swiss\_retweets\_ratio$ and $swiss\_replies\_ratio$ are defined analogously, for Retweets and Tweet replies respectively. This feature also relies on having a substantial set of users known to be Swiss. We again mostly use our set of train, validation and test data here. 
+where $swiss\_mentions\_ratio$ is a normalized number defined as the number of users mentioned who are known to be Swiss, divided by the total number of @mentions found in our sample of this user's Tweets. $swiss\_retweets\_ratio$ and $swiss\_replies\_ratio$ are defined analogously, for Retweets and Tweet replies respectively. This feature also relies on having a substantial set of users known to be Swiss. We again mostly use our set of train, validation and test data here. 
 
-\textbf{Swiss Named Places.} The goal of this feature is to extract geographic places in Switzerland mentioned in a user's Tweet. The hypothesis is that Swiss user should tend to mention a greater number of places in Switzerland than foreigners. Our original approach to extracting this feature was to create a set of all individual words found in our sample of a user's Tweets, then match these words against our database of Swiss places. However, this yielded numerous unwanted matches. We therefore decided to perform Named Entity Recognition (NER) on all tweet texts, and subsequently only use the entities recognized as referring to a geographic location. In SpaCy, the framework we used for this purpose, the relevant entities are those tagged as either  "GPE" (i.e. "countries, cities, states"\footnote{\href{https://spacy.io/api/annotation}{https://spacy.io/api/annotation}}). This already lead to much cleaner results as without NER, but the result sets still included words such as "Bahnhof" (i.e. trains station), "Welt" (i.e. world), and "Bar" (i.e. bar). To further improve on the accuracy of this feature, we decided to augment the filtering process by manually compiling a list of stop words - that is, a list of words which should not be considered geographic locations for our purpose, such as the ones stated before. By default, this feature extractor returns the total count if distinct geographic locations mentioned in the sample of a user's Tweets, as a single numeric feature. Optionally, it can also return the set of all distinct locations, rather than its count.
+\textbf{Swiss Named Places.} The goal of this feature is to extract geographic places in Switzerland mentioned in a user's Tweet. The hypothesis is that Swiss user should tend to mention a greater number of places in Switzerland than foreigners. Our original approach to extracting this feature was to create a set of all individual words found in our sample of a user's Tweets, then match these words against our database of Swiss places. However, this yielded numerous unwanted matches. We therefore decided to perform Named Entity Recognition (NER) on all tweet texts, and subsequently only use the entities recognized as referring to a geographic location. In SpaCy, the framework we used for this purpose, the relevant entities are those tagged as either  "GPE" (i.e. "countries, cities, states"\footnote{\href{https://spacy.io/api/annotation}{https://spacy.io/api/annotation}}). This already lead to much cleaner results as without NER, but the result sets still included words such as "Bahnhof" (i.e. trains station), "Welt" (i.e. world), and "Bar" (i.e. bar). To further improve on the accuracy of this feature, we decided to augment the filtering process by manually compiling a list of stop words - that is, a list of words which should not be considered geographic locations for our purpose, such as the ones stated before. By default, this feature extractor returns the total count of distinct geographic locations mentioned in the sample of a user's Tweets, as a single numeric feature. Optionally, it can also return the set of all distinct location names, rather than its count. This second option can enable this feature extractor to be used in different contexts as well. One such use case might be to try triangulate a Twitter use to a more precise area based on the geographic locations they mention in their Tweets.
 
 Feature extraction generally involves a large number of database requests and other time-consuming operations. However, once a given feature is extracted for a given user, its value will not change unless the underlying database changes. We therefore developed a feature caching system, where each feature extractor automatically stores its extracted values. Whenever a feature extractor is called on a user for which this feature has already been cached, the cached value is returned, without any recalculations. Optionally, this feature can be deactivated for any feature extractor, or on a meta-model level, for all the extractors used by this meta-model.
 
@@ -266,7 +275,7 @@ min(max(\frac{\Delta_{positive}}{\Delta_{avgs}}, \frac{\Delta_{negative}}{\Delta
 \end{split}
 \end{equation}
 
-\textbf{Scikit Learn.} We developed a wrapper around the classifiers provided by scikit-learn, in order to easily fit them into our localization pipeline. Users can instantiate this class and supply it with an instance of a classifier provided by scikit-learn. In our implementation, we mostly use the k-Nearest Neighbours classifier with a fixed, experimentally decided $k$. Other classifiers, such as SVMs, Naive Bayes, or a Decision Tree can easily be used through this wrapper, but we have observed the best results using k-Nearest Neighbors. As a confidence measure, we use the scikit-learn classifier's \textit{predict\_proba} function, which returns the probability with which a sample is in each class.
+\textbf{Scikit Learn.} We developed a wrapper around the classifiers provided by scikit-learn, in order to easily fit them into our localization pipeline. Users can instantiate this class and supply it with an instance of a classifier provided by scikit-learn. In our implementation, we mostly use the k-Nearest Neighbours classifier with a fixed, experimentally decided $k$. Other classifiers, such as SVMs, Naive Bayes, or a Decision Tree can easily be used through this wrapper, but we have observed the best results using k-Nearest Neighbors. As a confidence measure, we use the scikit-learn classifier's \textit{predict\_proba}\footnote{\href{https://github.com/scikit-learn/scikit-learn/blob/b194674c4/sklearn/neighbors/\_classification.py\#L199}{https://github.com/scikit-learn/scikit-learn/blob/b194674c4/sklearn/neighbors/\_classification.py\#L199}} function, which returns the probability with which a sample is in each class.
 
 \subsubsection{Metamodels}
 Metamodels are responsible for combining feature extractors and classifiers. They can provide a single classifier with one or more features, or they can use multiple classifiers and combine their results into a final decision. In order to test the individual performance of each of our features, we have implemented one meta-model per feature which only uses that one feature. These metamodels start with the prefix "Simple". They are \textit{SimpleInfluencerFollowedRatio}, \textit{SimpleHashtagSimilarity}, \textit{SimpleTweetInteractionBehavior}, \textit{SimpleSwissTweetInteraction}, and \textit{SimpleSwissNamedPlacesCount}. 
@@ -387,7 +396,7 @@ CPI_{samples} := \frac{\sum cpi(confidence, classif.)}{\#samples}
 \end{split}
 \end{equation}
 
-This metric works based on the fact that each confidence level must lie in the $[0.5, 1]$ interval, due to the fact that all classifiers perform a binary classification. The CPI equally rewards high confidence in correct classifications and low confidence in incorrect classifications. It also equally punishes high confidence in incorrect classifications and low confidence in correct classifications. Due to these properties, the CPI solely measures the performance of a model's confidence estimate, rather than its classification performance.
+We defined this metric in a way that is closely related to the F-measure, and allows us to assess the overall performance of our confidence estimation mechanism along a single axis. This metric works based on the fact that each confidence level must lie in the $[0.5, 1]$ interval, due to the fact that all classifiers perform a binary classification. The CPI equally rewards high confidence in correct classifications and low confidence in incorrect classifications. It also equally punishes high confidence in incorrect classifications and low confidence in correct classifications. Due to these properties, the CPI solely measures the performance of a model's confidence estimate, rather than its classification performance.
 
 \subsection{Swiss / non-Swiss Classification}
 We ran each of the "Simple" metamodels against our test set containing of 100 users, balanced between Swiss and non-Swiss. The following table shows how our metamodels performed:
@@ -397,7 +406,7 @@ We ran each of the "Simple" metamodels against our test set containing of 100 us
 \hline
 \textbf{Meta-Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F} \\
 \hline
-Simple Swiss Tweet Interaction & 0.93 & 0.98 & 0.87 & 0.92 \\
+Simple Swiss Tweet Interaction & \textbf{0.93} & \textbf{0.98} & \textbf{0.87} & \textbf{0.92} \\
 \hline
 Simple Infleuncers Followed Ratio & 0.81 & 0.97 & 0.61 & 0.75 \\
 \hline
@@ -415,6 +424,8 @@ As we can see, the top three metamodels performed rather well, resulting in a ma
 
 It stands out that \textit{Influencers Followed Ratio} and \textit{Swiss Named Places} have excellent precision, however, they show mediocre recall. In case of the former, a likely reason seems to be that our list of influencers does in fact consist of people of little interest for foreign users, but they may not reflect the interests of a large enough portion of the Swiss population. Another reason could be that many might that not every user will choose to follow Twitter accounts with domestic relevance. Instead, many might choose to follow international users and companies which are in line with their interests. In the case of the latter, the results suggest that many  users either don't mention any locations and places in their Tweets. This might again be due to the fact that users may choose to Tweet about topics such as technology, people and entertainment, rather than topics which involve the mentioning of locations, such as politics or travel.
 
+It is also noteworthy how badly the \textit{Simple Hashtag Similarity} feature performed. A possible explanation might be the fact that many of the observed hashtags, which are found in \hyperref[sec:appendix-hashtags]{Appendix B}, can be considered noise. Additionally, many of them carry little spatial locality, or are strictly tied to recent events, which may no longer be relevant in a few weeks or even days. A more promising approach might be to not compare the list of a user's hashtags to the most common hashtags found among Swiss users, but instead to define a list of words with strong spatial locality \cite{ryoo14a}. For instance, if a user is found to tweet about recent news events of global relevance, such as military operations or political decisions of global importance, this is not a good indicator of that person being Swiss or foreign. However, if said uses hashtags that specific to Switzerland, such as names of Swiss politicians or recent changes in domestic laws, they can serve as a much more reliable indicator.
+
 As mentioned above, we used these results to develop five additional metamodels which use a combination of more than one feature. We have evaluated these metamodels using the same pipeline as for the ones above, with the following results:
 
 \begin{center}
@@ -424,9 +435,9 @@ As mentioned above, we used these results to develop five additional metamodels 
 \hline
 Feature Combination 1 & 0.94 & 0.93 & 0.93 & 0.93 \\
 \hline
-Feature Combination 2 & 0.93 & 0.95 & 0.89 & 0.92 \\
+Feature Combination 2 & 0.93 & \textbf{0.95} & 0.89 & 0.92 \\
 \hline
-Feature Combination 3 & 0.95 & 0.94 & 0.96 & 0.95 \\
+Feature Combination 3 & \textbf{0.95} & 0.94 & \textbf{0.96} & \textbf{0.95} \\
 \hline
 Feature Combination 4 & 0.94 & 0.93 & 0.93 & 0.93 \\
 \hline
@@ -442,13 +453,13 @@ To compare the results of these additional metamodels, the following table conta
 \hline
 \textbf{Meta-Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F} \\
 \hline
-Feature Combination 3 & 0.95 & 0.94 & 0.96 & 0.95 \\
+Feature Combination 3 & \textbf{0.95} & 0.94 & \textbf{0.96} & \textbf{0.95} \\
 \hline
 Feature Combination 1 & 0.94 & 0.93 & 0.93 & 0.93 \\
 \hline
 Feature Combination 4 & 0.94 & 0.93 & 0.93 & 0.93 \\
 \hline
-Simple Swiss Tweet Interaction & 0.93 & 0.98 & 0.87 & 0.92 \\
+Simple Swiss Tweet Interaction & 0.93 & \textbf{0.98} & 0.87 & 0.92 \\
 \hline
 Feature Combination 2 & 0.93 & 0.95 & 0.89 & 0.92 \\
 \hline
@@ -475,14 +486,14 @@ We have evaluated our approach to confidence estimation on the same test set, as
 \hline
 \textbf{Meta-Model} & \textbf{Avg. Correct} & \textbf{Avg. Incorrect} & \textbf{CPI} \\
 \hline
-Simple Swiss Tweet Interaction & 0.99 & 0.86 & 0.93 \\
+Simple Swiss Tweet Interaction & \textbf{0.99} & \textbf{0.86} & \textbf{0.93} \\
 \hline
 Simple Infleuncers Followed Ratio & 0.96 & 0.84 & 0.80 \\
 \hline
 Simple Swiss Named Places & 0.95 & 0.80 & 0.81 \\
 \hline
 \hline
-Simple Tweet Interaction Behavior & 0.79 & 0.79 & 0.52 \\
+Simple Tweet Interaction Behavior & 0.79 & \textbf{0.79} & 0.52 \\
 \hline
 Simple Hashtag Similarity & 1.00 & 1.00 & 0.50 \\
 \hline
@@ -492,6 +503,8 @@ Simple Hashtag Similarity & 1.00 & 1.00 & 0.50 \\
 Our results show that using class membership probability as a confidence metric works rather well for our use case. While the confidence in incorrectly classified samples is fairly high, there is a significant gap between the average confidence in correctly vs. incorrectly classified ones. This is important, as it allows us to set a threshold of confidence, below which we can choose to reject a classification. This also shows in the CPI value, which rewards high confidence in correct classifications and low confidence in incorrect classifications. We also observe a relationship between the performance of a metamodel and the performance of its confidence estimation: Our three well-performing metamodels show good performance in their CPI, while the CPI is considerably lower for the worse-performing metamodels.
 
 \section{Conclusion and Future Work}
+We have discussed our problem statement and research question, the current state of the art, our theoretical and practical approach to solving this problem and achieving our goals, and we have evaluated our the results of our experiments. In this section, we will summarize our findings, draw our conclusions, and discuss how this project can be developed further, to improve in the results, and to tackle related problems.
+
 \subsection{Conclusion}
 We have implemented a full pipeline and data set for classifying Twitter users as either Swiss or non-Swiss, including five custom features and ten metamodels. To offer users a way of interacting with our system, we implemented a REST API and a dashboard-style web front end, which allows users to easily localize a Twitter user.
 
@@ -515,5 +528,19 @@ To use our system productively, we also see some potential in improving the API 
 \clearpage
 \bibliography{bibliography}
 \bibliographystyle{ieeetr}
+
+\clearpage
+\appendix
+\section{Tweet Search Terms}
+\label{sec:appendix-searchterms}
+\textbf{Swiss-specific:} bundeshaus, bundesrat, ständerat, nationalrat, sbb, palais federal, conseil federal, conseil des etats, conseil national, cff, palazzo federale, consiglio federale, consiglio degli stati, consiglio nazionale, ffs
+\bigbreak
+\noindent\textbf{Generic:} fussball, arbeit, stau, auto, bahn, öffentlicher verkehr, radio, song, lied, kino, film, football, travail, bouchon, voiture, train, transport public, radio, chanson, cinema, film, calcio, lavoro, ingorgo, macchina, treno, trasporto pubblico, radio, song, canzone, cinema
+
+\section{Most Common Hashtags}
+\label{sec:appendix-hashtags}
+The following were the 100 most common hashtags found in the Tweets we had collected from the Swiss users in our TVT set, at the time of our experiment.
+\bigbreak
+\noindent filo, bzo, o, suppenhuhn, verschworungstheorie, kornfeld, verbandsmaterial, livraison, altwis, queenkong, lagerdraht, kommunikationswissenschaft, langstrassenquartier, danza, kehrsiten, lagerzeit, smoothie, trimestre, vitznau, bucheli, himmelrich, gisikon, alarm, kunstlerduo, bache, allmend, himbeeren, unterschiede, resultats, nawodh, schotterwerks, profit, direction, nachtfalter, saucisses, wisskomm, carlspitteler, hitzkirch, ernte, wasserentnahmen, tierschutzorganisation, spieler, poller, biberdamm, festessen, wassermangel, umziehenistdieholle, donnees, impressionen, buron, urteils, saisonstart, sommerbeiz, moranen, walensee, gaumen, sichtung, wander, federale, gruppentouristen, grillades, amman, chinoise, te, zahlungsmittel, zonenordnung, dollar, sommerplatzchen, printausgabe, zigarettenhersteller, salzburgerfestspiele, lucernois, sponsor, schurpf, gurtenfestival19, stadtbild, ddps, nationalhymnen, neustadt, heimweh, ambitions, kaimans, realmadridatleti, planetarium, serendipita, findlinge, videobeweis, alpenrose, dipartimento, zuzuge, rutlibund, amherd, melville, diageo, hertensteinstrasse, aufforderung, federal, abenteuer, filorosso, federspiel
 
 \end{document}
