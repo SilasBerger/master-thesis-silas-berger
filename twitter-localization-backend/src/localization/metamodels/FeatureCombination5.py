@@ -1,4 +1,5 @@
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
 
 from src.localization import TrainValidateTestProvider
 from src.localization.Metamodel import Metamodel
@@ -15,7 +16,7 @@ class FeatureCombination5(Metamodel):
         self._tweet_interaction_behavior = TweetInteractionBehavior(allow_cache_updates=self._allow_cache_updates)
         self._hashtag_similarity = HashtagSimilarity(self._train, 100, self._use_cache,
                                                      self._allow_cache_updates)
-        self._clf = SKLearn()  # use default 3-NN clf
+        self._clf = SKLearn(KNeighborsClassifier(5))
 
     def _build(self):
         train_matrix = self._extract_feature_matrix(self._train)

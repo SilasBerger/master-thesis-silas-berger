@@ -6,10 +6,13 @@ from flask import jsonify
 
 from src.api.ApiContext import ApiContext
 from src.localization.Database import Database
+from src.localization.metamodels.FeatureCombination1 import FeatureCombination1
+from src.localization.metamodels.FeatureCombination2 import FeatureCombination2
+from src.localization.metamodels.FeatureCombination3 import FeatureCombination3
 from src.localization.metamodels.FeatureCombination4 import FeatureCombination4
+from src.localization.metamodels.FeatureCombination5 import FeatureCombination5
 from src.localization.metamodels.SimpleHashtagSimilarity import SimpleHashtagSimilarity
 from src.localization.metamodels.SimpleInfluencerFollowedRatio import SimpleInfluencerFollowedRatio
-from src.localization.metamodels.SimpleSwissFriendRatio import SimpleSwissFriendRatio
 from src.localization.metamodels.SimpleSwissNamedPlaces import SimpleSwissNamedPlacesCount
 from src.localization.metamodels.SimpleSwissTweetInteraction import SimpleSwissTweetInteraction
 from src.localization.metamodels.SimpleTweetInteractionBehavior import SimpleTweetInteractionBehavior
@@ -120,20 +123,26 @@ def route(app):
 
         def _instantiate_metamodel(self):
             metamodel = None
-            if self._metamodel_name == "FeatureCombination1":
-                metamodel = FeatureCombination4()
-            elif self._metamodel_name == "SimpleHashtagSimilarity":
+            if self._metamodel_name == "SimpleHashtagSimilarity":
                 metamodel = SimpleHashtagSimilarity()
             elif self._metamodel_name == "SimpleInfluencerFollowedRatio":
                 metamodel = SimpleInfluencerFollowedRatio()
-            elif self._metamodel_name == "SimpleSwissFriendRatio":
-                metamodel = SimpleSwissFriendRatio()
-            elif self._metamodel_name == "SimpleSwissNamedPlacesCount":
+            elif self._metamodel_name == "SimpleSwissNamedPlaces":
                 metamodel = SimpleSwissNamedPlacesCount()
             elif self._metamodel_name == "SimpleSwissTweetInteraction":
                 metamodel = SimpleSwissTweetInteraction()
             elif self._metamodel_name == "SimpleTweetInteractionBehavior":
                 metamodel = SimpleTweetInteractionBehavior()
+            elif self._metamodel_name == "FeatureCombination1":
+                metamodel = FeatureCombination1()
+            elif self._metamodel_name == "FeatureCombination2":
+                metamodel = FeatureCombination2()
+            elif self._metamodel_name == "FeatureCombination3":
+                metamodel = FeatureCombination3()
+            elif self._metamodel_name == "FeatureCombination4":
+                metamodel = FeatureCombination4()
+            elif self._metamodel_name == "FeatureCombination5":
+                metamodel = FeatureCombination5()
             return metamodel
 
         def run(self):
