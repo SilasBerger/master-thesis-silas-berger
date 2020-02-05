@@ -2,15 +2,15 @@
 This repository contains all code and files related to my master thesis project and report.
 
 ## Components
-## twitter-localizaiton-backend
+### twitter-localizaiton-backend
 Code for the backend, containing the data collection mechanism, localization pipeline and REST API, not including any database dumps.
 
-## twitter-localization-frontend
+### twitter-localization-frontend
 To run the frontend, first start up the backend as decribed above, then run the following steps:
 1. In `twitter-localization-frontend`, run `npm install`.
 2. In the same directory, run `npm run dev`.
 
-## master-thesis-report
+### master-thesis-report
 Files related to the written report.
 
 ## Usage
