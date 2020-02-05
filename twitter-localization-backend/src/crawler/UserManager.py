@@ -283,8 +283,16 @@ class UserManager:
             if not self.neo4j.user_exists(existing_user["screen_name"]):
                 self._graph.insert_user(existing_user)
             return existing_user
-        # TODO crawl user from Twitter API if not found locally
-        return None
+        new_user = self._twitter.find_user(screen_name)
+        if new_user is None:
+            # User not found in Twitter API.
+            return None
+        new_user = self._normalize_user_for_mongo(new_user)
+        new_user["friend_ids"] = self._twitter.get_friend_ids(id)
+        self._users_mongodb.save(new_user)
+        user_cursor = self._users_mongodb.find({"id": new_user["id"]})
+        self._collect_tweets_for_users(user_cursor, self._users_mongodb, skip_if_tweets_found=True)
+        return new_user
 
     def fetch_friend_ids_for_tvt_set(self, fname):
         with open(paths.convert_project_relative_path(os.path.join("configs", str(fname) + ".json")), "r") as infile:
@@ -298,7 +306,6 @@ class UserManager:
                 existing_user["friend_ids"] = friend_ids
                 self._users_test_set_mongodb.save(existing_user)
 
-    # TODO: move this to a new module
     def _collect_tweets_for_users(self, cursor, user_collection, skip_if_tweets_found=False):
         total_users = cursor.count()
         index = 0
@@ -324,7 +331,6 @@ class UserManager:
             user["tweets_fetched"] = True
             user_collection.save(user)
 
-    # TODO: move this to a new module
     def _normalize_tweet_for_db(self, tweet):
         n_tweet = {
             "status_id": tweet.id,

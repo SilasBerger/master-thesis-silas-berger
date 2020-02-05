@@ -40,8 +40,6 @@ class MetamodelTest:
         recall = MetamodelTest._calculate_recall(c_matrix)
         f_measure = MetamodelTest._calculate_f_measure(precision, recall)
         confidence_performance = MetamodelTest._evaluate_confidence(user_results)
-        if remove_graph_traces:
-            self._metamodel.cleanup(keep_final=False)
         return {
             "model_performance": {
                 "confusion": c_matrix, "accuracy": accuracy, "precision": precision, "recall": recall, "F": f_measure
