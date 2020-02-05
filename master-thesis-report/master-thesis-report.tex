@@ -56,7 +56,7 @@ Related research shows that only a small number of users indicate a valid and pr
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.60]{typhoon-trajectory-estimation}
+ 	\includegraphics[scale=0.60]{typhoon-trajectory-estimation}
 	\caption{Typhoon trajectory estimation using Twitter data \cite{saka10a}}
 	\label{fig:typhoon-trajectory-estimation}
 \end{figure}
@@ -510,7 +510,7 @@ Each classification in our system also produces a confidence value alongside. Th
 
 In our implementation, we decided to persist the results of our localizations to a graph database. However, this has not proven to provide any significant benefits to our development. Instead, we believe it might have been easier to persist all data to a single database, namely, MongoDB.
 
-\section{Future Work}
+\subsection{Future Work}
 There are are some features which we haven't implemented as part of this project, due to time constraints. One such feature is the Social Media Connection, outlined in section 4.1, which is based on the idea of attempting to link a user's Twitter profile to their presence on other social media platforms, which could then serve as a source for additional information.
 
 Further, we think it would be worthwhile to try and approach the classification part using Artificial Neural Networks. Since they are known to require extensive amounts of training data, as well as powerful computation hardware, we decided that such an approach was out of scope for this project.
@@ -525,13 +525,13 @@ To use our system productively, we also see some potential in improving the API 
 
 \clearpage
 \appendix
-\section{Tweet Search Terms}
+\chapter{Tweet Search Terms}
 \label{sec:appendix-searchterms}
 \textbf{Swiss-specific:} bundeshaus, bundesrat, ständerat, nationalrat, sbb, palais federal, conseil federal, conseil des etats, conseil national, cff, palazzo federale, consiglio federale, consiglio degli stati, consiglio nazionale, ffs
 \bigbreak
 \noindent\textbf{Generic:} fussball, arbeit, stau, auto, bahn, öffentlicher verkehr, radio, song, lied, kino, film, football, travail, bouchon, voiture, train, transport public, radio, chanson, cinema, film, calcio, lavoro, ingorgo, macchina, treno, trasporto pubblico, radio, song, canzone, cinema
 
-\section{Most Common Hashtags}
+\chapter{Most Common Hashtags}
 \label{sec:appendix-hashtags}
 The following were the 100 most common hashtags found in the Tweets we had collected from the Swiss users in our TVT set, at the time of our experiment.
 \bigbreak

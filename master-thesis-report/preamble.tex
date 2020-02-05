@@ -1,6 +1,5 @@
 
 %=============================================================================
-
 \usepackage{amsthm}
 \usepackage{xspace}
 \usepackage{float}
@@ -23,7 +22,7 @@
 \usepackage[normalem]{ulem} %emphasize still italic
 \usepackage{ucs}
 
-% \usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 % \usepackage[htt]{hyphenat}
 \usepackage{times}
 \usepackage{url}
@@ -40,7 +39,14 @@
 \usepackage{mdwlist}        % support for better spaced lists
 % allows for temporary adjustment of side margins
 \usepackage{chngpage}
-\usepackage[normalem]{ulem} 
+\usepackage[normalem]{ulem}
+
+\usepackage{amsfonts}
+\usepackage{relsize}
+\usepackage{blindtext}
+\usepackage{tcolorbox}
+% \usepackage{hyperref}
+\usepackage{pdfpages} 
 
 % constants
 
@@ -107,7 +113,7 @@
 
 %=============================================================================
 
-\newcommand{\needlines}[1]{\Needspace{#1\baselineskip}}
+\newcommand{\needlines}[1]{\Neegraphicxdspace{#1\baselineskip}}
 
 % source code
 \usepackage{xcolor}
@@ -193,12 +199,12 @@
 % ===========================================================================
 
 
-\newcommand{\thesistitle}{Title of the Thesis}
-\newcommand{\thesisauthor}{Given Name \& Surname}
-\newcommand{\thesisleiter}{Name of the Supervisor}
-\newcommand{\thesisasst}{Name of the Assistant}
-\newcommand{\thesissubtitle}{Thesis subtitle}
-\newcommand{\thesisdate}{Month and Year}
+\newcommand{\thesistitle}{Twitter User Localization}
+\newcommand{\thesisauthor}{Silas Berger}
+\newcommand{\thesisleiter}{Prof. Dr. E. Mugellini}
+\newcommand{\thesisasst}{Jacky Casas}
+\newcommand{\thesissubtitle}{}
+\newcommand{\thesisdate}{2020}
 
 
 
@@ -234,19 +240,23 @@
     
     {\bfseries\Huge \thesistitle \par
     \Large \vspace{0.1in} \thesissubtitle \par}
-
-    \vspace{0.3in} 
-    \LARGE{\textbf{Master Thesis} \\}
-    \vspace{0.4in}
-
-    {\Large \thesisauthor}
     
-    \vspace{0.3in}
-    {\Large Home University \par}
-%    {\Large Philosophisch-naturwissenschaftlichen Fakult\"{a}t \\
-%            der Universit\"{a}t Bern \par}
-    \vfill
+    \vspace{0.6in}
+%     {\Large Home University \par}
+    {\Large Masterarbeit der Philosophisch-naturwissenschaftlichen Fakult\"{a}t \\
+            der Universit\"{a}t Bern \par}
+
+	\vspace{0.6in}
+	{\Large vorgelegt von \par
+    \Large \vspace{0.1in} \textbf{\thesisauthor} \par}          
+          
+    \vspace{0.6in}
     {\Large \thesisdate \par}
+            
+    \vfill
+    \vspace{0.5in}
+	{\Large Leiterin der Arbeit \par
+    \Large \vspace{0.1in} \textbf{\thesisleiter} \par}
   
 
   \vspace{0.9in}
