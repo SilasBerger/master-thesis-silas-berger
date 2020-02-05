@@ -22,7 +22,7 @@ To run the backend API, complete the following steps:
 5. Complete the steps outlined in section "Credentials File".
 6. In `src`, run the file `app.py` (note: additional configuration may be required if not running from within PyCharm).
 
-Alternatively to steps 5 and 6, you can run `src/playground.py` to run any other component of the system, such as a model evaluation.
+Alternatively to step 6, you can run `src/playground.py` to run any other component of the system, such as a model evaluation.
 
 ### Credentials File
 Create a file `configs/credentials_default.json` with the following contents:
