@@ -27,4 +27,4 @@ def run_evaluation():
 
 
 if __name__ == "__main__":
-    try_model()
+    run_evaluation()

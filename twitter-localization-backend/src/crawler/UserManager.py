@@ -6,7 +6,6 @@ import time
 import pymongo
 from tqdm import tqdm
 
-from src.database.neo4j_binding import Neo4jBinding
 from src.geonames.GeonamesApi import GeonamesApi
 from src.geonames.GeonamesException import GeonamesException
 from src.geonames.GeonamesLocalDatabase import GeonamesLocalDatabase
@@ -14,7 +13,6 @@ from src.geonames.GeonamesRateLimitException import GeonamesRateLimitException
 from src.model import constants
 from src.util import collections
 from src.util import context, timing, paths
-from src.knowledgegraph.KnowledgeGraph import KnowledgeGraph
 
 
 class UserManager:
@@ -25,10 +23,8 @@ class UserManager:
     _CRAWL_DELAY_SECONDS = 0.2
 
     def __init__(self, twitter_api_binding):
-        self.neo4j = Neo4jBinding()
         self._twitter = twitter_api_binding
         self._connect()
-        self._graph = KnowledgeGraph()
 
     def _connect(self):
         self._host_connection = pymongo.MongoClient(context.get_config("mongodb_host"))
@@ -67,22 +63,6 @@ class UserManager:
             print("{} users fetched/updated".format(progress))
             time.sleep(UserManager._CRAWL_DELAY_SECONDS)
         print("done")
-
-    def sync_graph_influencers(self):
-        """
-        Filters database for users marked as influencers and adds them to the graph, or updates them if they
-        aready exist in the graph
-
-        :return: None
-        """
-        influencers_cursor = self._users_mongodb.find({"type": constants.UserType.INFLUENCER.value})
-        for influencer_user in influencers_cursor:
-            if self.neo4j.user_exists(influencer_user["screen_name"]):
-                # TODO handle updating existing users
-                continue
-            n_user = self._normalize_user_for_graph(influencer_user)
-            self._set_crawl_status(influencer_user, constants.CrawlStatus.IN_GRAPH.value)
-            self.neo4j.insert_user(n_user)
 
     def fetch_influencer_follower_ids(self, perform_update=False):
         """
@@ -277,12 +257,13 @@ class UserManager:
 
     def ensure_fetch_twitter_user(self, screen_name):
         existing_user = self._users_mongodb.find_one({"screen_name": screen_name})
-        if existing_user is None:
-            existing_user = self._users_test_set_mongodb.find_one({"screen_name": screen_name})
         if existing_user is not None:
-            if not self.neo4j.user_exists(existing_user["screen_name"]):
-                self._graph.insert_user(existing_user)
             return existing_user
+
+        existing_user = self._users_test_set_mongodb.find_one({"screen_name": screen_name})
+        if existing_user is not None:
+            return existing_user
+
         print(timing.get_timestamp() + ": @{} not found locally - querying Twitter API".format(screen_name))
         new_user = self._twitter.find_user(screen_name)
         if new_user is None:

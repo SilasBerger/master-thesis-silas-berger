@@ -1,6 +1,5 @@
 import numpy as np
 
-from src.knowledgegraph.KnowledgeGraph import KnowledgeGraph
 from src.localization import TrainValidateTestProvider
 from src.util import timing
 from tqdm import tqdm
@@ -10,7 +9,6 @@ class MetamodelTest:
 
     def __init__(self, metamodel):
         self._metamodel = metamodel
-        self._graph = KnowledgeGraph()
         train, validate, test = TrainValidateTestProvider.get_data()
         self._test_set = test
 

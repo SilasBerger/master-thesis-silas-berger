@@ -58,9 +58,6 @@ class Metamodel:
     def get_training_scores(self):
         return self._training_scores
 
-    def cleanup(self, keep_final_decisions=False):
-        self._db.neo4j.remove_localizations_by_model_instance(self._model_instance_id, keep_final=keep_final_decisions)
-
     def _build(self):
         raise NotImplementedError("function _build() is abstract in Model")
 

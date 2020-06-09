@@ -1,7 +1,6 @@
 import pymongo
 
 from src.util import context
-from src.database.neo4j_binding import Neo4jBinding
 
 
 class Database:
@@ -17,7 +16,6 @@ class Database:
         self.geonames_places_mongodb = self._database_connection[context.get_config("geonames_places_collection")]
         self.tweets_mongodb = self._database_connection[context.get_config("tweets_collection")]
         self.feature_cache = self._database_connection[context.get_config("feature_cache_collection")]
-        self.neo4j = Neo4jBinding()
 
     @staticmethod
     def instance():
