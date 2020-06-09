@@ -16,9 +16,9 @@
 - Add a file `credentials-default.json` to the `configs` directory, and refer to the `Credentials File` section for
   information on how to populate it. Note this file is gitignored in purpose, because it contains confidential
   data.
-- From the root of this repository, and after activating the VirtualEnv environment, run `python -m src.playground` to
-  run the `src/playground.py` file as an entry point. Note that the MingGW bash for Windows doesn't always display the
-  output correctly.
+- From the root of this repository, and after activating the VirtualEnv environment, run `python -m src.repl` to run the
+  `src/repl.py` file as an entry point. This allows you to use a specific (hard-coded but interchangeable) metamodel in
+  an interactive REPL-style way. Note that the MingGW bash for Windows doesn't always display the output correctly.
 
 ## Configuration
 ### Restoring a MongoDB Snapshot
