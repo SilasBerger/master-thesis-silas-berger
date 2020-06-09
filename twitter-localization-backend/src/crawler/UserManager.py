@@ -283,10 +283,12 @@ class UserManager:
             if not self.neo4j.user_exists(existing_user["screen_name"]):
                 self._graph.insert_user(existing_user)
             return existing_user
+        print(timing.get_timestamp() + ": @{} not found locally - querying Twitter API".format(screen_name))
         new_user = self._twitter.find_user(screen_name)
         if new_user is None:
             # User not found in Twitter API.
             return None
+        print(timing.get_timestamp() + ": @{} found on Twitter - fetching associated data".format(screen_name))
         new_user = self._normalize_user_for_mongo(new_user)
         new_user["friend_ids"] = self._twitter.get_friend_ids(id)
         self._users_mongodb.save(new_user)
@@ -320,7 +322,7 @@ class UserManager:
                     user["tweets_fetched"] = True
                     user_collection.save(user)
                     continue
-            print(timing.get_timestamp() + ": fetched tweets for user {} ({}/{})".format(user["screen_name"],
+            print(timing.get_timestamp() + ": fetched tweets for @{} (user {}/{})".format(user["screen_name"],
                                                                                         index,
                                                                                         total_users))
             tweets = self._twitter.fetch_tweets_by_user(user["id"], 100)

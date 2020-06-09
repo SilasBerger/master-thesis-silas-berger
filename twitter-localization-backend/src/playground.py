@@ -1,6 +1,6 @@
 from src.localization.metamodels.FeatureCombination4 import FeatureCombination4
 from src.localization.metamodels.FeatureCombination5 import FeatureCombination5
-from src.util import context
+from src.util import context, timing
 from src.testing.MetamodelTest import MetamodelTest
 
 
@@ -9,7 +9,12 @@ def try_model():
     context.load_config()
     metamodel = FeatureCombination4(use_cache=True, allow_cache_updates=True)
     train_scores = metamodel.build()
-    print(train_scores)
+    screen_name = "alain_berset"
+    (is_swiss, confidence) = metamodel.classify(screen_name)
+    print("{}: @{} is swiss: {} (confidence: {})".format(timing.get_timestamp(),
+                                                         screen_name,
+                                                         "true" if is_swiss else "false",
+                                                         confidence))
 
 
 def run_evaluation():
@@ -22,4 +27,4 @@ def run_evaluation():
 
 
 if __name__ == "__main__":
-    run_evaluation()
+    try_model()

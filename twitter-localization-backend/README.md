@@ -21,11 +21,24 @@ A JSON file named `configs_default.json` needs to be placed in the `configs` dir
 This file will be committed. Run `src.util.context.load_config()` at the beginning of your script. To use a config file other than `config_default.json`, pass the name of the desired config file. Alternatively, you can pass the absolute path of a config file to this method, together with `use_path=True`. Use `context.get_project_root()` to specify the path.
 
 ### Credentials File
-A JSON file named `credentials_default.json` needs to be placed in the `configs` directory, and needs to provide the following keys:
-- `neo4j_user`: username for the Neo4j database
-- `neo4j_password`: password for this Neo4j user
+A JSON file named `credentials_default.json` needs to be placed in the `configs` directory, and needs to have the
+following structure:
+```json
+{
+  "neo4j_user": "neo4j",
+  "neo4j_password": "knowledge",
+  "twitter_api_key": "<your_twitter_api_key>",
+  "twitter_api_key_secret": "<your_twitter_api_key_secret>",
+  "twitter_access_token": "<your_twitter_access_token>",
+  "twitter_access_token_secret": "<your_twitter_access_token_secret>",
+  "geonames_username": "<your_geonames_api_username>"
+}
+```
 
-This file will not be committed. Run `src.util.context.load_credentials()` at the beginning of your script. To use a credentials file other than `credentials_default.json`, pass the name of the desired credentials file. Alternatively, you can pass the absolute path of a credentials file to this method, together with `use_path=True`.  Use `context.get_project_root()` to specify the path.
+This file will not be committed. Run `src.util.context.load_credentials()` at the beginning of your script. To use a
+credentials file other than `credentials_default.json`, pass the name of the desired credentials file. Alternatively,
+you can pass the absolute path of a credentials file to this method, together with `use_path=True`.  Use
+`context.get_project_root()` to specify the path.
 
 # Architecture
 ## Data

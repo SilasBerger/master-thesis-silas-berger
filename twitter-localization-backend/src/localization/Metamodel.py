@@ -42,12 +42,11 @@ class Metamodel:
             print(timing.get_timestamp() + ": model {} can't localize user with screen_name {}: not found"
                   .format(self._model_instance_id, screen_name))
             return None, None
-        print(timing.get_timestamp() + ": localizing user with screen_name {}".format(screen_name))
+        print(timing.get_timestamp() + ": localizing @{}".format(screen_name))
         predicted_class, confidence = self._classify(twitter_user)
         result_geoid = LocalizationConstants.GEOID_SWITZERLAND \
             if predicted_class == 1 else LocalizationConstants.GEOID_FOREIGN
         self._db.neo4j.add_localization_relation(self, twitter_user["id"], result_geoid, confidence)
-        print(timing.get_timestamp() + ": screen_name {} is swiss: {}".format(screen_name, predicted_class))
         return predicted_class, confidence
 
     def get_model_name(self):
