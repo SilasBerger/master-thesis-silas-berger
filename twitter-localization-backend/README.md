@@ -3,8 +3,10 @@
 # Usage
 ## Setup and Running
 - Set up and activate a VirtualEnv environment, then run `pip install -r requirements.txt`
-- Download the required SpaCy modules, each with `python -m spacy download <module name>`
-  (e.g. `python -m spacy download de_core_news_sm`). The required module names are:
+- Download the required SpaCy modules by running `./download-spacy-modules.sh` from the root of this repo (if needed,
+  fix permissions for this file using `sudo chmod u+x download-spacy-modules.sh`). This script fetches each of the
+  required modules using `python -m spacy download <module name>` (e.g. `python -m spacy download de_core_news_sm`). The
+  required modules are:
   - `de_core_news_sm`
   - `fr_core_news_sm`
   - `it_core_news_sm`
