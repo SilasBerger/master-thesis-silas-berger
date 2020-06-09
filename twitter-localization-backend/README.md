@@ -1,11 +1,37 @@
 # Twitter Localization Research
 
 # Usage
-- set up and activate a VirtualEnv environment, run `pip install -r requirements.txt`
-- start DBs (Docker compose, TBA)
-- add a credentials file (see below)
+## Setup and Running
+- Set up and activate a VirtualEnv environment, then run `pip install -r requirements.txt`
+- Download the required SpaCy modules, each with `python -m spacy download <module name>`
+  (e.g. `python -m spacy download de_core_news_sm`). The required module names are:
+  - `de_core_news_sm`
+  - `fr_core_news_sm`
+  - `it_core_news_sm`
+  - `en_core_web_sm`
+- `cd` into the `database` directory and run `docker-compose up -d`. In case you want to restore data from a snapshot,
+  refer to the section _Restoring a MongoDB Snapshot_.
+- Add a file `credentials-default.json` to the `configs` directory, and refer to the `Credentials File` section for
+  information on how to populate it. Note this file is gitignored in purpose, because it contains confidential
+  data.
+- From the root of this repository, and after activating the VirtualEnv environment, run `python -m src.playground` to
+  run the `src/playground.py` file as an entry point. Note that the MingGW bash for Windows doesn't always display the
+  output correctly.
 
 ## Configuration
+### Restoring a MongoDB Snapshot
+To restore the MongoDB database from a Docker volume snapshot (`.tar` file), first copy that snapshot file into the
+`database` directory. For the purpose of this guide, we assume that the file is named `mongo-snap.tar`. Once done,
+run `docker-compose up -d` to allow MongoDB to build up its initial file structure. Wait a few seconds, then run the
+following commands to restore the snapshot and restart the database:
+
+```
+$ docker-compose down
+$ docker run --rm -v database_mongodb_data:/data/db -v $(pwd):/backup ubuntu bash -c "cd /data/db && tar xvf /backup/mongo-snap.tar --strip 2"
+$ docker-compose up -d
+```
+
+The database should now be up and running again, and it should be restored to that snapshot.
 
 ### Configs File
 *Note: Local paths are to be specified relative to the root of this repository, without leading slash.*

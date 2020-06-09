@@ -44,9 +44,6 @@ class Metamodel:
             return None, None
         print(timing.get_timestamp() + ": localizing @{}".format(screen_name))
         predicted_class, confidence = self._classify(twitter_user)
-        result_geoid = LocalizationConstants.GEOID_SWITZERLAND \
-            if predicted_class == 1 else LocalizationConstants.GEOID_FOREIGN
-        self._db.neo4j.add_localization_relation(self, twitter_user["id"], result_geoid, confidence)
         return predicted_class, confidence
 
     def get_model_name(self):

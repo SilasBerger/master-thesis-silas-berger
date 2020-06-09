@@ -32,8 +32,7 @@ class MetamodelTest:
         """
         print(timing.get_timestamp() + ": MetamodelTest: testing metamodel " + self._metamodel.get_model_instance_id())
         self._metamodel.build()
-        self._run_metamodel_on_test_set()
-        user_results = self._collect_user_results()
+        user_results = self._run_metamodel_on_test_set()
         c_matrix = self._calculate_confusion_matrix(user_results)
         accuracy = MetamodelTest._calculate_accuracy(c_matrix)
         precision = MetamodelTest._calculate_precision(c_matrix)
@@ -47,27 +46,22 @@ class MetamodelTest:
             "confidence_performance": confidence_performance
         }
 
-    def _collect_user_results(self):
-        results = []
-        for test_user in self._test_set:
-            res = self._graph.fetch_final_decision_for_user(test_user["id"], self._metamodel.get_model_instance_id())
-            localized_swiss, confidence = res
+    @staticmethod
+    def _is_correctly_classified(user, localized_swiss):
+        return (user["is_swiss"] and localized_swiss) or (not user["is_swiss"] and not localized_swiss)
+
+    def _run_metamodel_on_test_set(self):
+        user_results = []
+        for test_user in tqdm(self._test_set):
+            localized_swiss, confidence = self._metamodel.classify(test_user["screen_name"])
             user_result = {
                 "user_id": test_user["id"],
                 "is_swiss": test_user["is_swiss"],
                 "correctly_classified": MetamodelTest._is_correctly_classified(test_user, localized_swiss),
                 "confidence": confidence
             }
-            results.append(user_result)
-        return results
-
-    @staticmethod
-    def _is_correctly_classified(user, localized_swiss):
-        return (user["is_swiss"] and localized_swiss) or (not user["is_swiss"] and not localized_swiss)
-
-    def _run_metamodel_on_test_set(self):
-        for test_user in tqdm(self._test_set):
-            self._metamodel.classify(test_user["screen_name"])
+            user_results.append(user_result)
+        return user_results
 
     @staticmethod
     def _calculate_confusion_matrix(user_results):

@@ -8,7 +8,7 @@ def try_model():
     context.load_credentials()
     context.load_config()
     metamodel = FeatureCombination4(use_cache=True, allow_cache_updates=True)
-    train_scores = metamodel.build()
+    metamodel.build()
     screen_name = "alain_berset"
     (is_swiss, confidence) = metamodel.classify(screen_name)
     print("{}: @{} is swiss: {} (confidence: {})".format(timing.get_timestamp(),
